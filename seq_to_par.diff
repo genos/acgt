@@ -1,0 +1,18 @@
+[1mdiff --git a/seq.py b/par.py[m
+[1mindex 2c465be..dee6d6f 100644[m
+[1m--- a/seq.py[m
+[1m+++ b/par.py[m
+[36m@@ -1,11 +1,13 @@[m
+from collections.abc import Iterable[m
+from pathlib import Path[m
+[32mimport ray[m
+from .acgt import ACGT[m
+
+
+[32m@ray.remote[m
+def load(p: Path) -> ACGT:[m
+    return ACGT.from_str(p.read_text())[m
+
+
+def total(ps: Iterable[Path]) -> dict[str, int]:[m
+    return dict(zip("ACGT", sum([32mray.get[m([32m[[mload[32m.remote[m(p) for p in ps[32m][m), ACGT.empty())))

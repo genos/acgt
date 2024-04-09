@@ -1,0 +1,32 @@
+~/tmp/acgt$ rye run hypothesis write --binary-op operator.add
+# This test code was written by the `hypothesis.extra.ghostwriter` module
+# and is provided under the Creative Commons Zero public domain dedication.
+
+import operator
+from hypothesis import given, strategies as st
+
+# TODO: replace st.nothing() with an appropriate strategy
+
+add_operands = st.nothing()
+
+
+@given(a=add_operands, b=add_operands, c=add_operands)
+def test_associative_binary_operation_add(a, b, c):
+    left = operator.add(a, operator.add(b, c))
+    right = operator.add(operator.add(a, b), c)
+    assert left == right, (left, right)
+
+
+@given(a=add_operands, b=add_operands)
+def test_commutative_binary_operation_add(a, b):
+    left = operator.add(a, b)
+    right = operator.add(b, a)
+    assert left == right, (left, right)
+
+
+@given(a=add_operands)
+def test_identity_binary_operation_add(a):
+    identity = "identity element here"
+    assert a == operator.add(a, identity)
+    assert a == operator.add(identity, a)
+

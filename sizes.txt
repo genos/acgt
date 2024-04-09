@@ -1,0 +1,11 @@
+~/tmp/acgt$ ls -1 data | wc -l
+   20000
+~/tmp/acgt$ wc -l data/* | rg --only-matching  '(\d+) total' --replace '$1'
+10955493
+~/tmp/acgt$ wc -c data/* | rg --only-matching  '(\d+) total' --replace '$1'
+609075078
+~/tmp/acgt$ du -skh data
+620M    data
+~/tmp/acgt head -n2 data/17.acgt
+CACTCTCATCCACTACCTTTTGCTCCTCTACTGGTACTTCCAGAAAATTTTATTAGCCCC
+TGCGACAGGGGCGGGCTAGGCAATAATCTGGGCTGCACTTGTACGCTGCGCGTTGAA

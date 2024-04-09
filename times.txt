@@ -1,0 +1,36 @@
+~/tmp/acgt$ rye run ipython
+Python 3.11.8 (main, Feb 25 2024, 03:55:37) [Clang 17.0.6 ]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.22.2 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from pathlib import Path
+
+In [2]: from acgt import seq, par
+
+In [3]: files = [Path(f"data/{i}.acgt") for i in range(20_000)]
+
+In [4]: %time seq.total(files)
+CPU times: user 13 s, sys: 297 ms, total: 13.3 s
+Wall time: 13.3 s
+Out[4]: {'A': 149534612, 'C': 149517192, 'G': 149530828, 'T': 149536953}
+
+In [5]: import ray; ray.init()
+2024-04-02 12:07:19,067 INFO worker.py:1743 -- Started a local Ray instance. View the dashboard at http://127.0.0.1:8265
+Out[5]: RayContext(dashboard_url='127.0.0.1:8265', python_version='3.11.8', ray_version='2.10.0', ray_commit='09abba26b5bf2707639bb637c208d062a47b46f6')
+
+In [6]: %time par.total(files)
+CPU times: user 1.69 s, sys: 532 ms, total: 2.22 s
+Wall time: 1.89 s
+Out[6]: {'A': 149534612, 'C': 149517192, 'G': 149530828, 'T': 149536953}
+
+In [7]: ray.shutdown()
+
+In [8]: %time !k acgt.k
+"ACGT"!149534612 149517192 149530828 149536953
+CPU times: user 552 µs, sys: 4.31 ms, total: 4.86 ms
+Wall time: 1.3 s
+
+In [9]: %time !q acgt.q -q -s 16
+"ACGT"!149534612 149517192 149530828 149536953
+CPU times: user 671 µs, sys: 4.8 ms, total: 5.47 ms
+Wall time: 704 ms
