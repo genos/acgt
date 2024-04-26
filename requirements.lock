@@ -47,7 +47,7 @@ pyprojroot==0.3.0
     # via acgt
 pyyaml==6.0.1
     # via ray
-ray==2.10.0
+ray==2.12.0
     # via acgt
 referencing==0.34.0
     # via jsonschema
@@ -61,7 +61,7 @@ rpds-py==0.18.0
     # via referencing
 shellingham==1.5.4
     # via typer
-typer==0.12.2
+typer==0.12.3
     # via acgt
 typing-extensions==4.11.0
     # via pyprojroot
