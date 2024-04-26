@@ -1,6 +1,6 @@
 """Create fake ACGT data."""
 
-from random import choices, randrange, seed as seed
+from random import choices, randrange, seed
 
 from pyprojroot import here
 from rich.progress import track
