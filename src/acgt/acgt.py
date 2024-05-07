@@ -18,7 +18,7 @@ class ACGT:
         return "".join(x * c for x, c in zip("ACGT", self))
 
     def __iter__(self):
-        return iter((self.A, self.C, self.G, self.T))
+        return iter([self.A, self.C, self.G, self.T])
 
     def __add__(self, x):
         return ACGT(self.A + x.A, self.C + x.C, self.G + x.G, self.T + x.T)
