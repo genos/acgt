@@ -16,7 +16,7 @@ Out[4]: {'A': 149534612, 'C': 149517192, 'G': 149530828, 'T': 149536953}
 
 In [5]: import ray; ray.init()
 2024-04-02 12:07:19,067 INFO worker.py:1743 -- Started a local Ray instance. View the dashboard at http://127.0.0.1:8265
-Out[5]: RayContext(dashboard_url='', python_version='3.11.8', ray_version='2.12.0', ray_commit='549c4b7694483f6bc9e519b61e6f575e13510343')
+Out[5]: RayContext(dashboard_url='', python_version='3.11.8', ray_version='2.21.0', ray_commit='a912be84d6944bc32cfe84a9a3fe0b0227574536')
 
 In [6]: %time par.total(files)
 CPU times: user 1.58 s, sys: 545 ms, total: 2.13 s

@@ -47,7 +47,7 @@ pyprojroot==0.3.0
     # via acgt
 pyyaml==6.0.1
     # via ray
-ray==2.12.0
+ray==2.21.0
     # via acgt
 referencing==0.34.0
     # via jsonschema

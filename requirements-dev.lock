@@ -32,12 +32,12 @@ filelock==3.13.3
 frozenlist==1.4.1
     # via aiosignal
     # via ray
-hypothesis==6.100.1
+hypothesis==6.100.6
 idna==3.6
     # via requests
 iniconfig==2.0.0
     # via pytest
-ipython==8.23.0
+ipython==8.24.0
 jedi==0.19.1
     # via ipython
 jsonschema==4.21.1
@@ -61,7 +61,7 @@ parso==0.8.4
     # via jedi
 pexpect==4.9.0
     # via ipython
-pluggy==1.4.0
+pluggy==1.5.0
     # via pytest
 prompt-toolkit==3.0.43
     # via ipython
@@ -76,11 +76,11 @@ pygments==2.17.2
     # via rich
 pyprojroot==0.3.0
     # via acgt
-pyright==1.1.360
-pytest==8.1.2
+pyright==1.1.362
+pytest==8.2.0
 pyyaml==6.0.1
     # via ray
-ray==2.12.0
+ray==2.21.0
     # via acgt
 referencing==0.34.0
     # via jsonschema
@@ -92,7 +92,7 @@ rich==13.7.1
 rpds-py==0.18.0
     # via jsonschema
     # via referencing
-ruff==0.4.2
+ruff==0.4.4
 setuptools==69.2.0
     # via nodeenv
 shellingham==1.5.4
