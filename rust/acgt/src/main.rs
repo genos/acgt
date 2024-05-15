@@ -49,7 +49,7 @@ impl Acgt {
 fn main() {
     let x: Acgt = (0..20000)
         .into_par_iter()
-        .map(|x| Acgt::load(format!("{}/../data/{x}.acgt", env!("CARGO_MANIFEST_DIR"))))
+        .map(|x| Acgt::load(format!("{}/../../data/{x}.acgt", env!("CARGO_MANIFEST_DIR"))))
         .sum();
     println!("{x:?}");
 }
