@@ -34,3 +34,8 @@ In [9]: %time !q acgt.q -q -s 16
 "ACGT"!149534612 149517192 149530828 149536953
 CPU times: user 320 µs, sys: 2.43 ms, total: 2.75 ms
 Wall time: 577 ms
+
+In [10]: %time !./acgt/target/release/acgt
+149534612 149517192 149530828 149536953
+CPU times: user 543 µs, sys: 1.68 ms, total: 2.23 ms
+Wall time: 682 ms
