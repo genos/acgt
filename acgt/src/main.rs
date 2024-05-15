@@ -1,56 +1,40 @@
-#![deny(clippy::all)]
-#![warn(clippy::pedantic)]
-#![warn(clippy::nursery)]
 use rayon::prelude::*;
 use std::{
-    fmt,
-    fs::File,
-    io::{BufReader, Read},
-    iter::Sum,
-    path::Path,
+    fs,
+    io::{self, Read},
+    iter, path,
 };
 
-#[derive(Default)]
-struct Acgt {
-    a: u64,
-    c: u64,
-    g: u64,
-    t: u64,
-}
+#[derive(Default, Debug)]
+struct Acgt(u64, u64, u64, u64);
 
-impl fmt::Display for Acgt {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_fmt(format_args!("{} {} {} {}", self.a, self.c, self.g, self.t))
-    }
-}
-
-impl Sum for Acgt {
+impl iter::Sum for Acgt {
     fn sum<I: Iterator<Item = Self>>(i: I) -> Self {
         let mut x = Self::default();
         for y in i {
-            x.a += y.a;
-            x.c += y.c;
-            x.g += y.g;
-            x.t += y.t;
+            x.0 += y.0;
+            x.1 += y.1;
+            x.2 += y.2;
+            x.3 += y.3;
         }
         x
     }
 }
 
 impl Acgt {
-    fn load(p: impl AsRef<Path>) -> Self {
+    fn load(p: impl AsRef<path::Path>) -> Self {
         let mut x = Self::default();
-        let mut b = BufReader::new(File::open(p).unwrap());
+        let mut b = io::BufReader::new(fs::File::open(p).unwrap());
         let mut bs = [0; 512];
         loop {
             match b.read(&mut bs) {
                 Ok(n) if n > 0 => {
                     for c in bs.iter().take(n) {
                         match c {
-                            b'A' => x.a += 1,
-                            b'C' => x.c += 1,
-                            b'G' => x.g += 1,
-                            b'T' => x.t += 1,
+                            b'A' => x.0 += 1,
+                            b'C' => x.1 += 1,
+                            b'G' => x.2 += 1,
+                            b'T' => x.3 += 1,
                             _ => {}
                         }
                     }
@@ -67,5 +51,5 @@ fn main() {
         .into_par_iter()
         .map(|x| Acgt::load(format!("{}/../data/{x}.acgt", env!("CARGO_MANIFEST_DIR"))))
         .sum();
-    println!("{x}");
+    println!("{x:?}");
 }
