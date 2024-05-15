@@ -7,9 +7,8 @@ fn main():
 
     @parameter
     fn f(i: Int) capturing -> None:
-        var p = Path("../data/" + str(i) + ".acgt")
         try:
-            var s = p.read_text()
+            var s = Path("../data/" + str(i) + ".acgt").read_text()
             x[0] += s.count("A")
             x[1] += s.count("C")
             x[2] += s.count("G")
