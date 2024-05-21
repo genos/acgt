@@ -1,7 +1,7 @@
 use rayon::prelude::*;
 use std::{
     fs,
-    io::{self, Read},
+    io::{BufReader, Read},
     iter, path,
 };
 
@@ -24,7 +24,7 @@ impl iter::Sum for Acgt {
 impl Acgt {
     fn load(p: impl AsRef<path::Path>) -> Self {
         let mut x = Self::default();
-        let mut b = io::BufReader::new(fs::File::open(p).unwrap());
+        let mut b = BufReader::new(fs::File::open(p).unwrap());
         let mut bs = [0; 512];
         loop {
             match b.read(&mut bs) {
@@ -47,9 +47,14 @@ impl Acgt {
 }
 
 fn main() {
-    let x: Acgt = (0..20000)
+    let x: Acgt = (0..20_000)
         .into_par_iter()
-        .map(|x| Acgt::load(format!("{}/../../data/{x}.acgt", env!("CARGO_MANIFEST_DIR"))))
+        .map(|x| {
+            Acgt::load(format!(
+                "{}/../../data/{x}.acgt",
+                env!("CARGO_MANIFEST_DIR")
+            ))
+        })
         .sum();
     println!("{x:?}");
 }
