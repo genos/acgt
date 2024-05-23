@@ -8,7 +8,7 @@ function load(i::Int64)
     for (i, c) in enumerate(_cs)
         x[i] += count(==(c), s)
     end
-    return x
+    x
 end
 
 @time x = @distributed ((a, b)->a+b) for i in 0:19_999
