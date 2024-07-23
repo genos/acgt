@@ -1,0 +1,14 @@
+cabal-version:   3.6
+name:            acgt
+version:         0.1.0.0
+license:         MIT
+author:          Graham Enos
+maintainer:      graham.enos@gmail.com
+category:        Data
+build-type:      Simple
+
+executable acgt
+    ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N16
+    main-is:          Main.hs
+    build-depends:    base ^>=4.20.0.0, bytestring ^>= 0.12.1.0, unliftio ^>= 0.2.12.1
+    default-language: GHC2024
