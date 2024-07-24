@@ -29,20 +29,17 @@ fromChar = \case
   'T' -> ACGT 0 0 0 1
   _ -> ACGT 0 0 0 0
 
-fromBS :: B.ByteString -> ACGT
-fromBS = B.foldl' (\acgt x -> acgt <> fromChar x) mempty
-
 fromFile :: FilePath -> IO ACGT
-fromFile f = fromBS <$> B.readFile f
+fromFile f = B.foldl' (\acgt x -> acgt <> fromChar x) mempty <$> B.readFile f
 
-fromInt :: FilePath -> Int -> IO ACGT
-fromInt d n = fromFile $! d <> "/" <> show n <> ".acgt"
+fromDirInt :: FilePath -> Int -> IO ACGT
+fromDirInt d n = fromFile $! d <> "/" <> show n <> ".acgt"
 
-doAll :: FilePath -> IO ACGT
-doAll d = do
+readAll :: FilePath -> IO ACGT
+readAll d = do
   c <- getNumCapabilities
-  xs <- pooledMapConcurrentlyN c (fromInt d) [0..19_999::Int]
+  xs <- pooledMapConcurrentlyN c (fromDirInt d) [0..19_999::Int]
   pure $! fold xs
 
 main :: IO ()
-main = print =<< traverse doAll =<< getArgs
+main = print =<< traverse readAll =<< getArgs
