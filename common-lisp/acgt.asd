@@ -1,5 +1,5 @@
 (asdf:defsystem #:acgt
-  :depends-on (#:coalton #:uiop)
+  :depends-on (#:uiop)
   :serial t
   :components ((:file "packages")
                (:file "acgt")))
