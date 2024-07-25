@@ -1,4 +1,5 @@
 coalton/acgt
+common-lisp/acgt
 data/
 
 # Created by https://www.toptal.com/developers/gitignore/api/commonlisp,julia,macos,haskell,python,rust,vim
