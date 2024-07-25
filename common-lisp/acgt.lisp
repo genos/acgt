@@ -36,6 +36,10 @@
 (declaim (ftype (function (string fixnum) acgt) read-all-into-acgt))
 (defun read-all-into-acgt (d n)
   (loop :for i fixnum :below n
-        :with x = (make-acgt)
-        :do (setf x (<> x (dir-int->acgt d i)))
+        :for x = (make-acgt) :then (<> x (dir-int->acgt d i))
         :finally (return x)))
+
+(defun main ()
+  (let ((args (uiop:command-line-arguments)))
+    (uiop:println (acgt:read-all-into-ACGT (first args) (parse-integer (second args))))
+    (uiop:quit)))

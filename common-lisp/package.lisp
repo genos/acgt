@@ -9,8 +9,5 @@
     #:string->acgt
     #:file->acgt
     #:dir-int->acgt
-    #:read-all-into-acgt))
-
-(defpackage #:acgt/driver
-  (:use #:common-lisp)
-  (:export #:main))
+    #:read-all-into-acgt
+    #:main))

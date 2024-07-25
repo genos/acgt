@@ -1,13 +1,8 @@
 (asdf:defsystem #:acgt
   :depends-on (#:uiop)
   :serial t
-  :components ((:file "packages")
-               (:file "acgt")))
-
-(asdf:defsystem #:acgt/driver
-  :depends-on (#:acgt #:uiop)
-  :serial t
-  :components ((:file "driver"))
+  :components ((:file "package")
+               (:file "acgt"))
   :build-operation "program-op"
   :build-pathname "acgt"
-  :entry-point "acgt/driver:main")
+  :entry-point "acgt:main")
