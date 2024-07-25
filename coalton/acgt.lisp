@@ -20,18 +20,20 @@
   (define-instance (Monoid ACGT)
     (define mempty (ACGT 0 0 0 0)))
 
-  (define-instance (Into Char ACGT)
-    (define (into c)
-      (match c
-        (#\A (ACGT 1 0 0 0))
-        (#\C (ACGT 0 1 0 0))
-        (#\G (ACGT 0 0 1 0))
-        (#\T (ACGT 0 0 0 1))
-        (_ (ACGT 0 0 0 0)))))
-
   (define-instance (Into String ACGT)
     (define (into s)
-       (iter:fold! <> mempty (map into (str:chars s)))))
+      (let ((a (cell:new 0))
+            (c (cell:new 0))
+            (g (cell:new 0))
+            (t (cell:new 0)))
+        (for x in s
+          (match x
+            (#\A (cell:increment! a))
+            (#\C (cell:increment! c))
+            (#\G (cell:increment! g))
+            (#\T (cell:increment! t))
+            (_   0)))
+        (ACGT (cell:read a) (cell:read c) (cell:read g) (cell:read t)))))
 
   (declare read-file-into-ACGT ((Into :A file:Pathname) => :A -> ACGT))
   (define (read-file-into-ACGT f)

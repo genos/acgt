@@ -3,12 +3,11 @@
     #:coalton
     #:coalton-prelude)
   (:local-nicknames
+    (#:cell coalton-library/cell)
     (#:iter coalton-library/iterator)
-    (#:file coalton-library/file)
-    (#:str coalton-library/string))
+    (#:file coalton-library/file))
   (:export
     #:ACGT
-    #:.a #:.c #:.g #:.t
     #:read-file-into-ACGT
     #:read-dir-int-into-ACGT
     #:read-all-into-ACGT))
