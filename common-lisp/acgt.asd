@@ -1,5 +1,5 @@
 (asdf:defsystem #:acgt
-  :depends-on (#:uiop)
+  :depends-on (#:uiop #:lparallel)
   :serial t
   :components ((:file "package")
                (:file "acgt"))
