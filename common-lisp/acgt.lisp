@@ -19,10 +19,10 @@
 (declaim (ftype (function (simple-string) acgt) string->acgt))
 (defun string->acgt (s)
   (loop :for c :across s
-        :counting (eql #\A c) :into as
-        :counting (eql #\C c) :into cs
-        :counting (eql #\G c) :into gs
-        :counting (eql #\T c) :into ts
+        :count (eql #\A c) :into as
+        :count (eql #\C c) :into cs
+        :count (eql #\G c) :into gs
+        :count (eql #\T c) :into ts
         :finally (return (make-acgt :a as :c cs :g gs :t ts))))
 
 (declaim (ftype (function (string) acgt) file->acgt))
@@ -35,11 +35,18 @@
 
 (declaim (ftype (function (string fixnum) acgt) read-all-into-acgt))
 (defun read-all-into-acgt (d n)
-  (loop :for i fixnum :below n
-        :for x = (make-acgt) :then (<> x (dir-int->acgt d i))
-        :finally (return x)))
+  (lparallel:preduce
+    #'<>
+    (lparallel:pmap
+      'vector
+      #'(lambda (i) (dir-int->acgt d i))
+      (loop :for i fixnum :below n :collect i))))
 
 (defun main ()
-  (let ((args (uiop:command-line-arguments)))
-    (uiop:println (acgt:read-all-into-ACGT (first args) (parse-integer (second args))))
+  (let* ((args (uiop:command-line-arguments))
+         (d (or (first args) "../data"))
+         (n (parse-integer (or (second args) "20000")))
+         (cs (parse-integer (or (third args) "16"))))
+    (setf lparallel:*kernel* (lparallel:make-kernel cs))
+    (uiop:println (acgt:read-all-into-ACGT d n))
     (uiop:quit)))
