@@ -4,13 +4,12 @@
     #:coalton-prelude)
   (:local-nicknames
     (#:cell coalton-library/cell)
+    (#:file coalton-library/file)
     (#:iter coalton-library/iterator)
-    (#:file coalton-library/file))
-  (:export
-    #:ACGT
-    #:read-file-into-ACGT
-    #:read-dir-int-into-ACGT
-    #:read-all-into-ACGT))
+    (#:list coalton-library/list)
+    (#:str  coalton-library/string)
+    (#:sys  coalton-library/system))
+  (:export #:main))
 
 (defpackage #:acgt/driver
   (:use #:common-lisp)

@@ -48,5 +48,4 @@
          (n (parse-integer (or (second args) "20000")))
          (cs (parse-integer (or (third args) "16"))))
     (setf lparallel:*kernel* (lparallel:make-kernel cs))
-    (uiop:println (acgt:read-all-into-ACGT d n))
-    (uiop:quit)))
+    (uiop:println (acgt:read-all-into-ACGT d n))))
