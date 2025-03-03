@@ -1,6 +1,6 @@
 [package]
 name = "acgt"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2024"
 
 [dependencies]
@@ -10,6 +10,7 @@ rayon = "1.10.0"
 lto = true
 codegen-units = 1
 panic = "abort"
+strip = true
 
 [profile.dev]
 debug = 0
