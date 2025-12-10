@@ -1,4 +1,4 @@
-from algorithm import parallelize
+from algorithm import sync_parallelize
 from pathlib import Path
 
 
@@ -6,9 +6,9 @@ fn main():
     var x = SIMD[DType.uint64, 4](0, 0, 0, 0)
 
     @parameter
-    fn f(i: Int) capturing -> None:
+    fn f(i: Int) raises capturing -> None:
         try:
-            var s = Path("../data/" + str(i) + ".acgt").read_text()
+            var s = Path("../data/" + i.__str__() + ".acgt").read_text()
             x[0] += s.count("A")
             x[1] += s.count("C")
             x[2] += s.count("G")
@@ -16,5 +16,5 @@ fn main():
         finally:
             pass
 
-    parallelize[f](20_000)
+    sync_parallelize[f](20_000)
     print(x)
