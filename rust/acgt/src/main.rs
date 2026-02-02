@@ -2,26 +2,21 @@
 #![deny(clippy::pedantic)]
 #![deny(clippy::nursery)]
 #![deny(unsafe_code)]
+#![feature(portable_simd)]
 use rayon::prelude::*;
 use std::{
     fs,
     io::{BufReader, Read},
     iter, path,
+    simd::{Simd, u64x4},
 };
 
 #[derive(Default, Debug)]
-struct Acgt(u64, u64, u64, u64);
+struct Acgt(u64x4);
 
 impl iter::Sum for Acgt {
     fn sum<I: Iterator<Item = Self>>(i: I) -> Self {
-        let mut x = Self::default();
-        for y in i {
-            x.0 += y.0;
-            x.1 += y.1;
-            x.2 += y.2;
-            x.3 += y.3;
-        }
-        x
+        Self(i.map(|x| x.0).sum())
     }
 }
 
@@ -35,10 +30,10 @@ impl Acgt {
                 Ok(n) if n > 0 => {
                     for c in bs.iter().take(n) {
                         match c {
-                            b'A' => x.0 += 1,
-                            b'C' => x.1 += 1,
-                            b'G' => x.2 += 1,
-                            b'T' => x.3 += 1,
+                            b'A' => x.0 += Simd::from_array([1, 0, 0, 0]),
+                            b'C' => x.0 += Simd::from_array([0, 1, 0, 0]),
+                            b'G' => x.0 += Simd::from_array([0, 0, 1, 0]),
+                            b'T' => x.0 += Simd::from_array([0, 0, 0, 1]),
                             _ => {}
                         }
                     }
