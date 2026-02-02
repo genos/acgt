@@ -1,3 +1,7 @@
+#![deny(clippy::all)]
+#![deny(clippy::pedantic)]
+#![deny(clippy::nursery)]
+#![deny(unsafe_code)]
 use rayon::prelude::*;
 use std::{
     fs,
