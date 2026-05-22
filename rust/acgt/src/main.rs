@@ -24,7 +24,7 @@ impl Acgt {
     fn load(p: impl AsRef<path::Path>) -> Self {
         let mut x = Self::default();
         let mut b = BufReader::new(fs::File::open(p).unwrap());
-        let mut bs = [0; 512];
+        let mut bs = [0; 256];
         loop {
             match b.read(&mut bs) {
                 Ok(n) if n > 0 => {

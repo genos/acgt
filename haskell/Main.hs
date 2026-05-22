@@ -42,4 +42,4 @@ readAll d = do
   pure $! fold xs
 
 main :: IO ()
-main = print =<< traverse readAll =<< getArgs
+main = getArgs >>= traverse readAll >>= print
