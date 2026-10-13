@@ -1,13 +1,13 @@
 [project]
 name = "acgt"
-version = "0.4.0"
+version = "0.5.0"
 description = "A silly example, intended to show how algebraic structure (commutative monoids) can yield computational benefits (map-shuffle-reduce parallelism)."
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.14,<3.15"
 dependencies = [
     "pyprojroot>=0.3.0",
-    "ray>=2.58.0",
-    "typer>=0.27.1",
+    "ray>=2.59.0",
+    "typer>=0.27.3",
 ]
 
 [project.scripts]
@@ -15,14 +15,14 @@ data = "acgt.data:cli"
 
 [dependency-groups]
 dev = [
-    "hypothesis>=6.165.10",
-    "ipython>=9.16.1",
-    "pyright>=1.1.411",
+    "hypothesis>=6.169.0",
+    "ipython>=9.17.1",
+    "pyright>=1.1.414",
     "pytest>=9.1.1",
-    "ruff>=0.16.4",
-    "ty>=0.0.74",
+    "ruff>=0.17.0",
+    "ty>=0.0.86",
 ]
 
 [build-system]
-requires = ["uv_build>=0.9.11,<0.10.0"]
+requires = ["uv_build>=0.13.0,<0.14.0"]
 build-backend = "uv_build"
